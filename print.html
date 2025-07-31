@@ -239,14 +239,246 @@
 
 </style>
 <h1 id="getting-started"><a class="header" href="#getting-started">Getting started</a></h1>
-<h2 id="l1-and-l2-support"><a class="header" href="#l1-and-l2-support">L1 and L2 support</a></h2>
-<p>This client supports running in two different modes:</p>
+<p>Ethrex is a minimalist, stable, modular and fast implementation of the Ethereum protocol in <a href="https://www.rust-lang.org/">Rust</a>.
+The client supports running in two different modes:</p>
 <ul>
 <li>As a regular Ethereum execution client</li>
 <li>As a multi-prover ZK-Rollup (supporting SP1, RISC Zero and TEEs), where block execution is proven and the proof sent to an L1 network for verification, thus inheriting the L1's security. Support for based sequencing is currently in the works.</li>
 </ul>
 <p>We call the first one "ethrex L1" and the second one "ethrex L2".
 You can find more information on our <a href="getting-started/../l1">L1</a> or <a href="getting-started/../l2">L2</a> docs, respectively.</p>
+<h2 id="where-to-start"><a class="header" href="#where-to-start">Where to start</a></h2>
+<p>To get started with ethrex, you can follow the <a href="getting-started/./installing.html">installation guide</a> to set up the client on your machine.
+Then, a good next step would be to <a href="getting-started/./running.html">run a local node</a> and see ethrex in action.</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<style>
+.mdbook-alerts {
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  border-left: 0.25em solid var(--mdbook-alerts-color);
+}
+
+.mdbook-alerts > *:first-child {
+  margin-top: 0;
+}
+
+.mdbook-alerts > *:last-child {
+  margin-bottom: 0;
+}
+
+.mdbook-alerts-title {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  line-height: 1;
+  color: var(--mdbook-alerts-color);
+  text-transform: capitalize;
+}
+
+.mdbook-alerts-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.2em;
+  background-color: currentColor;
+  -webkit-mask: no-repeat center / 100%;
+  mask: no-repeat center / 100%;
+  -webkit-mask-image: var(--mdbook-alerts-icon);
+  mask-image: var(--mdbook-alerts-icon);
+}
+
+.mdbook-alerts-note {
+  --mdbook-alerts-color: rgb(9, 105, 218);
+  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-tip {
+  --mdbook-alerts-color: rgb(26, 127, 55);
+  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-important {
+  --mdbook-alerts-color: rgb(130, 80, 223);
+  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-warning {
+  --mdbook-alerts-color: rgb(154, 103, 0);
+  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-caution {
+  --mdbook-alerts-color: rgb(207, 34, 46);
+  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
+}
+
+</style>
+<h1 id="installing-ethrex"><a class="header" href="#installing-ethrex">Installing ethrex</a></h1>
+<p>Before <a href="getting-started/./running.html">running the ethrex client</a>, you need to install it.
+We have multiple ways to install, depending on your needs.</p>
+<p>Pre-built binaries for Linux and macOS are available for each release.
+See <a href="getting-started/installing.html#installing-from-pre-built-binaries">Installing from pre-built binaries</a> for installation instructions.</p>
+<p>You can also <a href="getting-started/installing.html#installing-through-cargo-install">install through cargo install</a>, or <a href="getting-started/installing.html#building-from-source">build the client from source</a>.</p>
+<h2 id="installing-from-pre-built-binaries"><a class="header" href="#installing-from-pre-built-binaries">Installing from pre-built binaries</a></h2>
+<p>To install ethrex from pre-built binaries, first download the binaries for your platform from the <a href="https://github.com/lambdaclass/ethrex/releases">release page</a>.
+You can also download it from the command line using <code>curl</code> or <code>wget</code>:</p>
+<pre><code class="language-sh"># For Linux x86_64
+curl -L https://github.com/lambdaclass/ethrex/releases/latest/download/ethrex-linux_x86_64 -o ethrex
+wget https://github.com/lambdaclass/ethrex/releases/latest/download/ethrex-linux_x86_64 -O ethrex
+
+# For Linux ARM
+curl -L https://github.com/lambdaclass/ethrex/releases/latest/download/ethrex-linux_aarch64 -o ethrex
+wget https://github.com/lambdaclass/ethrex/releases/latest/download/ethrex-linux_aarch64 -O ethrex
+
+# For MacOS
+curl -L https://github.com/lambdaclass/ethrex/releases/latest/download/ethrex-macos_aarch64 -o ethrex
+wget https://github.com/lambdaclass/ethrex/releases/latest/download/ethrex-macos_aarch64 -O ethrex
+</code></pre>
+<p>And set the execution bit:</p>
+<pre><code class="language-sh">chmod +x ethrex
+</code></pre>
+<p>After that, you can verify the program is working by running:</p>
+<pre><code class="language-sh">./ethrex --version
+</code></pre>
+<p>This should output something like:</p>
+<pre><code class="language-text">ethrex ethrex/v0.1.0-HEAD-23191af/aarch64-apple-darwin/rustc-v1.87.0
+</code></pre>
+<div class="mdbook-alerts mdbook-alerts-tip">
+<p class="mdbook-alerts-title">
+  <span class="mdbook-alerts-icon"></span>
+  tip
+</p>
+<p>For convenience, you can move the <code>ethrex</code> binary to a directory in your <code>PATH</code>, so you can run it from anywhere.</p>
+</div>
+<p>After installing the client, see <a href="getting-started/./running.html">"Running the client"</a> for instructions on how to use it to run L1 and/or L2 networks.</p>
+<h2 id="installing-through-cargo-install"><a class="header" href="#installing-through-cargo-install">Installing through <code>cargo install</code></a></h2>
+<p>To install the client, <a href="https://www.rust-lang.org/tools/install">first install Rust</a> and then run:</p>
+<pre><code class="language-sh">cargo install --locked ethrex \
+    --git https://github.com/lambdaclass/ethrex.git \
+    --tag v0.0.2-rc.1 \
+    --features dev
+</code></pre>
+<p>This installs the <code>ethrex</code> binary.
+For more information on how it is built and installed, see <a href="https://doc.rust-lang.org/cargo/commands/cargo-install.html">the cargo-install documentation</a>.</p>
+<p>After that, you can verify the program is working by running:</p>
+<pre><code class="language-sh">ethrex --version
+</code></pre>
+<p>This should output something like:</p>
+<pre><code class="language-text">ethrex ethrex/v0.1.0-HEAD-23191af/aarch64-apple-darwin/rustc-v1.87.0
+</code></pre>
+<p>After installing the client, see <a href="getting-started/./running.html">"Running the client"</a> for instructions on how to use it to run L1 and/or L2 networks.</p>
+<h2 id="building-from-source"><a class="header" href="#building-from-source">Building from source</a></h2>
+<p>This section assumes you already have <a href="https://www.rust-lang.org/tools/install">Rust's <code>cargo</code></a> and <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git"><code>git</code></a> installed.</p>
+<p>You can download the source code of a release from the <a href="https://github.com/lambdaclass/ethrex/releases">GitHub releases page</a>, or by cloning the repository at that version:</p>
+<pre><code class="language-sh">git clone --branch &lt;LATEST_VERSION_HERE&gt; --depth 1 https://github.com/lambdaclass/ethrex.git
+</code></pre>
+<p>After that, you can run the following command inside the cloned repo to build the client:</p>
+<pre><code class="language-sh">cargo build --bin ethrex --release --features dev
+</code></pre>
+<p>You can find the built binary inside <code>target/release</code> directory:</p>
+<pre><code class="language-sh">./target/release/ethrex --version
+</code></pre>
+<p>This should output something like:</p>
+<pre><code class="language-text">ethrex ethrex/v0.1.0-HEAD-23191af/aarch64-apple-darwin/rustc-v1.87.0
+</code></pre>
+<div class="mdbook-alerts mdbook-alerts-tip">
+<p class="mdbook-alerts-title">
+  <span class="mdbook-alerts-icon"></span>
+  tip
+</p>
+<p>For convenience, you can move the <code>ethrex</code> binary to a directory in your <code>PATH</code>, so you can run it from anywhere.</p>
+</div>
+<p>After installing the client, see <a href="getting-started/./running.html">"Running the client"</a> for instructions on how to use it to run L1 and/or L2 networks.</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<style>
+.mdbook-alerts {
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  border-left: 0.25em solid var(--mdbook-alerts-color);
+}
+
+.mdbook-alerts > *:first-child {
+  margin-top: 0;
+}
+
+.mdbook-alerts > *:last-child {
+  margin-bottom: 0;
+}
+
+.mdbook-alerts-title {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  line-height: 1;
+  color: var(--mdbook-alerts-color);
+  text-transform: capitalize;
+}
+
+.mdbook-alerts-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.2em;
+  background-color: currentColor;
+  -webkit-mask: no-repeat center / 100%;
+  mask: no-repeat center / 100%;
+  -webkit-mask-image: var(--mdbook-alerts-icon);
+  mask-image: var(--mdbook-alerts-icon);
+}
+
+.mdbook-alerts-note {
+  --mdbook-alerts-color: rgb(9, 105, 218);
+  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-tip {
+  --mdbook-alerts-color: rgb(26, 127, 55);
+  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-important {
+  --mdbook-alerts-color: rgb(130, 80, 223);
+  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-warning {
+  --mdbook-alerts-color: rgb(154, 103, 0);
+  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-caution {
+  --mdbook-alerts-color: rgb(207, 34, 46);
+  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
+}
+
+</style>
+<h1 id="running-a-node"><a class="header" href="#running-a-node">Running a node</a></h1>
+<p>This guide will help you start a local L1+L2 stack using ethrex.
+It is assumed that you have already <a href="getting-started/./installing.html">installed ethrex</a>.</p>
+<p>Running <code>ethrex --help</code> will display the help message.</p>
+<h2 id="running-an-l1-dev-environment"><a class="header" href="#running-an-l1-dev-environment">Running an L1 dev environment</a></h2>
+<p>After <a href="getting-started/./installing.html">installing ethrex</a>, you can start a local L1 by running:</p>
+<pre><code class="language-sh">ethrex --dev
+</code></pre>
+<div class="mdbook-alerts mdbook-alerts-tip">
+<p class="mdbook-alerts-title">
+  <span class="mdbook-alerts-icon"></span>
+  tip
+</p>
+<p>In case you want to start a new L1, you can remove the data of the old one by executing:</p>
+<pre><code class="language-sh">ethrex removedb
+</code></pre>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <style>
 .mdbook-alerts {
@@ -601,7 +833,7 @@ when you start the client. The location of the db's files will depend on your OS
 </code></pre>
 <ul>
 <li>RPC endpoint: localhost:8545</li>
-<li>Genesis file: ./test_data/genesis-l1.json</li>
+<li>Genesis file: fixtures/genesis/l1-dev.json</li>
 </ul>
 <h2 id="test"><a class="header" href="#test">Test</a></h2>
 <p>For testing, we're using three kinds of tests.</p>
@@ -665,7 +897,7 @@ make localnet-assertoor-blob
 <p>For reference on each individual check see the <a href="https://github.com/ethpandaops/assertoor/wiki#supported-tasks-in-assertoor">assertoor-wiki</a></p>
 <h2 id="run"><a class="header" href="#run">Run</a></h2>
 <p>Example run:</p>
-<pre><code class="language-bash">cargo run --bin ethrex -- --network test_data/genesis-kurtosis.json
+<pre><code class="language-bash">cargo run --bin ethrex -- --network fixtures/genesis/kurtosis.json
 </code></pre>
 <p>The <code>network</code> argument is mandatory, as it defines the parameters of the chain.
 For more information about the different cli arguments check out the next section.</p>
@@ -828,10 +1060,10 @@ INFO ethrex_p2p::sync::trie_rebuild: State Trie Rebuild Progress: 68%, estimated
 <pre><code class="language-bash"># Navigate to tooling/sync directory
 cd tooling/sync
 
-# Run target for hoodi 
+# Run target for hoodi
 make start-hoodi-metrics-docker
 
- # Run target for holesky 
+ # Run target for holesky
 make start-holesky-metrics-docker
 </code></pre>
 </li>
@@ -851,18 +1083,17 @@ A consensus node must be running for the syncing to work.</p>
 <p>Enable metrics by using the <code>--metrics</code> flag when starting the node.</p>
 </li>
 <li>
-<p>Set the <code>--metrics.port</code> cli arg of the ethrex binary to match the port defined in <code>crates/blockchain/metrics/provisioning/prometheus/prometheus_l1_sync_docker.yaml</code></p>
+<p>Set the <code>--metrics.port</code> cli arg of the ethrex binary to match the port defined in <code>metrics/provisioning/prometheus/prometheus_l1_sync_docker.yaml</code></p>
 </li>
 <li>
 <p>Run the docker containers:</p>
-<pre><code class="language-bash"># Navigate to crates/blockchain/metrics directory
-cd crates/blockchain/metrics
+<pre><code class="language-bash">cd metrics
 
  docker compose -f docker-compose-metrics.yaml -f docker-compose-metrics-l1.overrides.yaml up
 </code></pre>
 </li>
 </ol>
-<p>For more details on running a sync go to <code>ethrex/tooling/sync/readme.md</code>.</p>
+<p>For more details on running a sync go to <code>tooling/sync/readme.md</code>.</p>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <style>
 .mdbook-alerts {
@@ -2088,6 +2319,9 @@ sequenceDiagram
     Sequencer -&gt;&gt; OnChainProposer: Sends batch as usual
     OnChainProposer -&gt;&gt; Sequencer: OK
 </pre>
+<h2 id="limitations"><a class="header" href="#limitations">Limitations</a></h2>
+<p>Due to the gas cost of computing the rolling hashes, there is a limit to how many deposits can be handled in a single batch.</p>
+<p>To prevent creation of invalid batches, we save to the rollup store information about the deposits being included in the current batch.</p>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <style>
 .mdbook-alerts {
@@ -2483,7 +2717,7 @@ To do this, they compute a merkle proof for the included batch and call the L1 <
 </li>
 <li>
 <p>Upgrade the proxy by calling the method <code>upgradeToAndCall(address newImplementation, bytes memory data)</code>. The <code>data</code> parameter is the calldata to call on the new implementation as an initialization, you can pass an empty stream.</p>
-<pre><code class="language-sh">rex send &lt;PROXY_ADDRESS&gt; 0 &lt;PRIVATE_KEY&gt; -- 'upgradeToAndCall(address,bytes)' &lt;NEW_IMPLEMENTATION_ADDRESS&gt; &lt;INITIALIZATION_CALLDATA&gt;
+<pre><code class="language-sh">rex send &lt;PROXY_ADDRESS&gt; 'upgradeToAndCall(address,bytes)' &lt;NEW_IMPLEMENTATION_ADDRESS&gt; &lt;INITIALIZATION_CALLDATA&gt; --private-key &lt;PRIVATE_KEY&gt;
 </code></pre>
 </li>
 <li>
@@ -2497,12 +2731,12 @@ To do this, they compute a merkle proof for the included batch and call the L1 <
 <ol>
 <li>
 <p>Start the transfer:</p>
-<pre><code class="language-sh">rex send &lt;PROXY_ADDRESS&gt; 0 &lt;CURRENT_OWNER_PRIVATE_KEY&gt; -- 'transferOwnership(address)' &lt;NEW_OWNER_ADDRESS&gt;
+<pre><code class="language-sh">rex send &lt;PROXY_ADDRESS&gt; 'transferOwnership(address)' &lt;NEW_OWNER_ADDRESS&gt; --private-key &lt;CURRENT_OWNER_PRIVATE_KEY&gt;
 </code></pre>
 </li>
 <li>
 <p>Accept the ownership:</p>
-<pre><code class="language-sh">rex send &lt;PROXY_ADDRESS&gt; 0 &lt;NEW_OWNER_PRIVATE_KEY&gt; -- 'acceptOwnership()'
+<pre><code class="language-sh">rex send &lt;PROXY_ADDRESS&gt; 'acceptOwnership()' --private-key &lt;NEW_OWNER_PRIVATE_KEY&gt;
 </code></pre>
 </li>
 </ol>
@@ -2781,7 +3015,7 @@ Before the <code>zkVM</code> code (or guest), there is a directory called <code>
 <li><a href="https://docs.succinct.xyz/docs/sp1/introduction">SP1</a>
 <ol>
 <li><code>curl -L https://sp1up.succinct.xyz | bash</code></li>
-<li><code>sp1up --version 5.0.0</code></li>
+<li><code>sp1up --version 5.0.8</code></li>
 </ol>
 </li>
 <li><a href="https://docs.soliditylang.org/en/latest/installing-solidity.html">SOLC</a></li>
@@ -4099,7 +4333,8 @@ TODO: add updated graph with L1 block time distribution
 cargo build --release --bin ethrex
 
 # Execute the import
-./target/release/ethrex --network cmd/ethrex/networks/hoodi/genesis.json import test_data/hoodi-blocks-first-thousand.rlp
+# Notice that the .rlp file is stored with Git LFS, it needs to be downloaded before importing
+./target/release/ethrex --network fixtures/genesis/perf-ci.json import  fixtures/blockchain/l2-1k-erc20.rlp
 </code></pre>
 <ul>
 <li>The network argument is common to all ethrex commands. It specifies the genesis file, or a public network like holesky. This is the starting state of the blockchain.</li>
@@ -4410,7 +4645,7 @@ make load-test-io
 <pre><code class="language-sh">--txpool.max-pending-txns 100000000 --txpool.max-new-txns 1000000000 --txpool.pending-max-count 100000000 --txpool.pending-max-size 10000000000 --txpool.basefee-max-count 100000000000 --txpool.basefee-max-size 1000000000000 --txpool.queued-max-count 1000000000
 </code></pre>
 <h3 id="changing-block-gas-limit"><a class="header" href="#changing-block-gas-limit">Changing block gas limit</a></h3>
-<p>By default the block gas limit is the one Ethereum mainnet uses, i.e. 30 million gas. If you wish to change it, just edit the <code>gasLimit</code> field in the genesis file (in the case of <code>ethrex</code> it's <code>genesis-l2.json</code>, in the case of <code>reth</code> it's <code>genesis-load-test.json</code>). Note that the number has to be passed as a hextstring.</p>
+<p>Currently the gas limit is set to 150M gas. If you wish to change the default value edit the <code>gasLimit</code> field in the genesis file (in the case of <code>ethrex</code> it's <code>fixtures/genesis/l2.json</code>, in the case of <code>reth</code> it's <code>fixtures/genesis/load-test.json</code>). Note that the number has to be passed as a hextstring.</p>
 <h2 id="flamegraphs"><a class="header" href="#flamegraphs">Flamegraphs</a></h2>
 <p>To analyze performance during load tests (both <code>ethrex</code> and <code>reth</code>) you can use <code>cargo flamegraph</code> to generate a flamegraph of the node.</p>
 <p>For <code>ethrex</code>, you can run the server with:</p>
@@ -4512,7 +4747,7 @@ rzup install rust
 </code></pre>
 <h4 id="sp1"><a class="header" href="#sp1"><a href="https://docs.succinct.xyz/docs/sp1/introduction">SP1</a></a></h4>
 <pre><code class="language-sh">curl -L https://sp1up.succinct.xyz | bash
-sp1up --version 5.0.0
+sp1up --version 5.0.8
 </code></pre>
 <h3 id="environment-variables"><a class="header" href="#environment-variables">Environment Variables</a></h3>
 <p>Before running any command, set the following environment variables depending on the operation:</p>
